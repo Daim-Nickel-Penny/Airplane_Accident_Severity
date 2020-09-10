@@ -7,16 +7,17 @@ class FormComp extends Component {
       this.state = {
         name: '',
         email: '',
-        ss:'' ,
-        dsi:'',
-        tsc:'' ,
-        cm:'',
-        tforce:'' ,
-        ct:'' , 
-        acode:'' , 
-        me:'' , 
-        rules:'' , 
-        wmetric:''
+        ss:'0' ,
+        dsi:'0',
+        tsc:'0' ,
+        cm:'0',
+        tforce:'0' ,
+        ct:'0' , 
+        acode:'0' , 
+        me:'0' , 
+        rules:'0' , 
+        wmetric:'0',
+        outpus:'0'
        
       };
     }
@@ -75,27 +76,49 @@ class FormComp extends Component {
   
   
     handleSubmit = event => {
+      let s;
       event.preventDefault();
-      const { name, email,ss , dsi , tsc , cm , tforce , ct , acode , me , rules , wmetric } = this.state;
+
       console.log(this.state.name,this.state.email,this.state.ss,this.state.dsi,this.state.tsc,this.state.cm
         ,this.state.tforce,this.state.ct,this.state.acode,this.state.me,this.state.rules,this.state.wmetric)
       alert(`Your Response has been recorded`);
+      
+      axios.post('https://accidentapi.herokuapp.com/predict', {
+                ss:this.state.ss ,
+                  dsi:this.state.dsi,
+                  tsc:this.state.tsc ,
+                  cm:this.state.cm,
+                  tforce:this.state.tforce ,
+                  ct:this.state.ct , 
+                  acode:this.state.acode , 
+                  me:this.state.me , 
+                  rules:this.state.rules , 
+                  wmetric:this.state.wmetric
 
-              axios.post('https://jsonplaceholder.typicode.com/users', { name })
+                },{headers:{"Content-Type" : "application/json"}})
       .then(res=>{
         console.log(res);
         console.log(res.data);
+
+      this.setState.outpus=this.state.res
         //window.location = "/retrieve"
+      }).then((response) => {
+        console.log(response);
+      }, (error) => {
+        console.log(error);
       })
-  
-              
-    };
+      
+console.log((this.state.outpus)+1)
+
+        };
+
 
     
     
   
     render() {
       return (
+        <div>
         <form onSubmit={this.handleSubmit}>
 
           <div className='form-group'>
@@ -123,15 +146,15 @@ class FormComp extends Component {
           </div>
             
             
-
+        
              
 
 
           <div className='form-group'>
-               <label htmlFor='name'>Safety Score</label>
-            <input
-              name='ss'
+               <label htmlFor='number'>Safety Score</label>
+            <input     
               id='ss'
+              type="number"
               placeholder='Enter Safety Score'
               value={this.state.ss}
               onChange={this.handless}
@@ -251,6 +274,8 @@ class FormComp extends Component {
             Submit
           </button>
         </form>
+      <h1>{this.state.outpus}</h1>
+        </div>
       );
     }
   }
