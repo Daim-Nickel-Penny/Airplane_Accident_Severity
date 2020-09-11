@@ -1,5 +1,8 @@
 import React ,{Component} from 'react';
 import axios from "axios"; 
+    
+let w;
+  
 
 class FormComp extends Component {
     constructor(props) {
@@ -17,11 +20,13 @@ class FormComp extends Component {
         me:'0' , 
         rules:'0' , 
         wmetric:'0',
-        outpus:'0'
+        outpus:'0',
        
       };
     }
-  
+
+
+
     handleNameChange = event => {
       this.setState({ name: event.target.value })
     };
@@ -71,19 +76,17 @@ class FormComp extends Component {
       };
     
      
-    
 
   
-  
-    handleSubmit = event => {
-      let s;
+    handleSubmit =async event => {
+
       event.preventDefault();
 
       console.log(this.state.name,this.state.email,this.state.ss,this.state.dsi,this.state.tsc,this.state.cm
         ,this.state.tforce,this.state.ct,this.state.acode,this.state.me,this.state.rules,this.state.wmetric)
       alert(`Your Response has been recorded`);
       
-      axios.post('https://accidentapi.herokuapp.com/predict', {
+     const res =await axios.post('https://accidentapi.herokuapp.com/predict', {
                 ss:this.state.ss ,
                   dsi:this.state.dsi,
                   tsc:this.state.tsc ,
@@ -96,19 +99,8 @@ class FormComp extends Component {
                   wmetric:this.state.wmetric
 
                 },{headers:{"Content-Type" : "application/json"}})
-      .then(res=>{
-        console.log(res);
-        console.log(res.data);
-
-      this.setState.outpus=this.state.res
-        //window.location = "/retrieve"
-      }).then((response) => {
-        console.log(response);
-      }, (error) => {
-        console.log(error);
-      })
-      
-console.log((this.state.outpus)+1)
+    
+     console.log(res.data.output)
 
         };
 
@@ -117,6 +109,7 @@ console.log((this.state.outpus)+1)
     
   
     render() {
+
       return (
         <div>
         <form onSubmit={this.handleSubmit}>
