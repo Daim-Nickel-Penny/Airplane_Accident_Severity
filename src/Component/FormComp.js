@@ -2,7 +2,8 @@ import React ,{Component} from 'react';
 import axios from "axios"; 
     
 let w;
-  
+  let res;
+
 
 class FormComp extends Component {
     constructor(props) {
@@ -20,9 +21,10 @@ class FormComp extends Component {
         me:'0' , 
         rules:'0' , 
         wmetric:'0',
-        outpus:'0',
+        outpus:'',
        
       };
+      this.handleSubmit = this.handleSubmit.bind(this)
     }
 
 
@@ -86,7 +88,7 @@ class FormComp extends Component {
         ,this.state.tforce,this.state.ct,this.state.acode,this.state.me,this.state.rules,this.state.wmetric)
       alert(`Your Response has been recorded`);
       
-     const res =await axios.post('https://accidentapi.herokuapp.com/predict', {
+      res =await axios.post('https://accidentapi.herokuapp.com/predict', {
                 ss:this.state.ss ,
                   dsi:this.state.dsi,
                   tsc:this.state.tsc ,
@@ -99,17 +101,25 @@ class FormComp extends Component {
                   wmetric:this.state.wmetric
 
                 },{headers:{"Content-Type" : "application/json"}})
-    
+  
      console.log(res.data.output)
+    
 
+  
         };
 
+
+     
+  
+
+       
 
     
     
   
     render() {
-
+    
+      
       return (
         <div>
         <form onSubmit={this.handleSubmit}>
@@ -267,11 +277,11 @@ class FormComp extends Component {
             Submit
           </button>
         </form>
-      <h1>{this.state.outpus}</h1>
+      <h1>{ }</h1>
         </div>
       );
     }
   }
-
+ 
 
   export default FormComp;
