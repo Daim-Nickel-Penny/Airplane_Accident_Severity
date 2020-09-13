@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 
 
+
 class FormComp extends Component {
   constructor(props) {
     super(props);
@@ -19,6 +20,11 @@ class FormComp extends Component {
       rules: "0",
       wmetric: "0",
       output: "",
+      condition:"",
+      warn:"Submit The form to get result",
+      shade:"",
+      imgurl:"https://thumbs.gfycat.com/GrimyEthicalAsianpiedstarling-max-1mb.gif"
+     
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -109,14 +115,28 @@ class FormComp extends Component {
     );
     console.log(res);
     this.setState({ output: res.data.output });
+
+
+      this.state.condition=this.state.output;
+      if(this.state.condition == 0){
+        this.setState({warn:"highly fatal and damaging",shade:"#f32013",imgurl:"https://media2.giphy.com/media/cLqxgg4nke0iu8UpzD/giphy.gif"})
+        console.log("highly fatal and damaging")
+      }else if (this.state.condition == 2) {
+        this.setState({warn:"significant damages and fatalities ",shade:"#ff4000",imgurl:"https://media1.giphy.com/media/B0uJ6d5OXb50k/giphy.gif"})
+        console.log("significant damages and fatalities ")
+      }else if (this.state.condition == 3) {
+        this.setState({warn:"significant damages and serious injuries",shade:"#ffbf00",imgurl:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/SADC_road_sign_W346.gif/1200px-SADC_road_sign_W346.gif"})
+        console.log("significant damages and serious injuries")
+      }else{
+        this.setState({warn:"minor damage and injury",shade:"#00cc00",imgurl:"https://thumbs.gfycat.com/UniqueSizzlingFinwhale-size_restricted.gif"})
+        console.log("minor damage and injury")
+      }
+    
+
   };
 
   render() {
-
-
-    if (this.state.output === 1) {
-      
-    }
+ 
 
 
 
@@ -271,7 +291,28 @@ class FormComp extends Component {
             Submit
           </button>
         </form>
-        <h1>{this.state.output}</h1>
+        <div>
+              <div className="card" style={{background:this.state.shade}}>
+        <img className="im" src={this.state.imgurl} alt="Warning Message" height="150px" width="150px"  />
+        <div className="containers">
+            {/* <h4><b>{this.state.output}</b></h4>  */}
+      
+           {/* {  console.log(this.state.output+"bejjjfshj")}
+           {  console.log(this.state.warn+"nfsdnfjknsdjkfsdjkfhjkshfjkd")} */}
+    
+          <h2 className="gl" style={{
+ fontSize:"40px",
+ color:"white",
+ textAlign:"center",
+ WebkitAnimation:"gl 1s ease-in-out infinite alternate",
+ MozAnimation:"gl 1s ease-in-out infinite alternate",
+ animation:"glow 1s ease-in-out infinite alternate"
+  
+}}>{this.state.warn}</h2> 
+        </div>
+      </div>
+
+    </div>
       
         
      
