@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 
+
 class FormComp extends Component {
   constructor(props) {
     super(props);
@@ -111,8 +112,28 @@ class FormComp extends Component {
   };
 
   render() {
+
+
+    if (this.state.output === 1) {
+      
+    }
+
+
+
+
     return (
       <div>
+
+<div className="container demo">
+   <div className="content">
+      <div id="large-header" className="large-header">
+         <canvas id="demo-canvas"></canvas>
+         <h1 className="main-title glow"><span className="thin">Flight Accident</span> Detector</h1>
+      </div>
+   </div>
+</div>
+
+
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label htmlFor="name">Name</label>
@@ -251,6 +272,10 @@ class FormComp extends Component {
           </button>
         </form>
         <h1>{this.state.output}</h1>
+      
+        
+     
+        
       </div>
     );
   }
