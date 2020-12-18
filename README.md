@@ -1,6 +1,3 @@
+# Application Accident Severity
 
-
-## Available Scripts
-
-
-
+[Check The Safety Score here!](https://airplane-check.web.app/)
